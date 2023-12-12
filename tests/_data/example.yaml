@@ -1,0 +1,5 @@
+build:
+  base_image: python:3.12-slim
+  dependencies:
+    apt: [curl, git]
+    pip: [attrs, pyyaml]

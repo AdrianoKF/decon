@@ -1,0 +1,66 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "decon"
+dynamic = ["version"]
+description = 'Declarative container image specification'
+readme = "README.md"
+requires-python = ">=3.9"
+license = "Apache-2.0"
+keywords = []
+authors = [{ name = "Adrian Rumpold", email = "a.rumpold@gmail.com" }]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = ["pyyaml", "typer", "typing_extensions"]
+
+[project.urls]
+Documentation = "https://github.com/AdrianoKF/decon#readme"
+Issues = "https://github.com/AdrianoKF/decon/issues"
+Source = "https://github.com/AdrianoKF/decon"
+
+[project.scripts]
+decon = "decon.cli:app"
+
+[tool.hatch.version]
+path = "src/decon/__init__.py"
+
+[tool.hatch.envs.default]
+dependencies = ["coverage[toml]>=6.5", "pytest"]
+path = ".venv"
+
+[tool.hatch.envs.default.scripts]
+test = "pytest {args:tests}"
+test-cov = "coverage run -m pytest {args:tests}"
+cov-report = ["- coverage combine", "coverage report"]
+cov = ["test-cov", "cov-report"]
+
+[[tool.hatch.envs.all.matrix]]
+python = ["3.9", "3.10", "3.11", "3.12"]
+
+[tool.hatch.envs.types]
+dependencies = ["mypy>=1.0.0"]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/decon tests}"
+
+[tool.coverage.run]
+source_pkgs = ["decon", "tests"]
+branch = true
+parallel = true
+omit = ["src/decon/__about__.py"]
+
+[tool.coverage.paths]
+decon = ["src/decon", "*/decon/src/decon"]
+tests = ["tests", "*/decon/tests"]
+
+[tool.coverage.report]
+exclude_lines = ["no cov", "if __name__ == .__main__.:", "if TYPE_CHECKING:"]
