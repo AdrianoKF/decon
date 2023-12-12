@@ -29,8 +29,8 @@ class Renderer(ABC):
 class BaseImageRenderer(Renderer):
     """Renderer for a base image specification."""
 
-    @override
     @classmethod
+    @override
     def accepts(cls, config: Config) -> bool:
         try:
             return config.build.base_image is not None
@@ -46,8 +46,8 @@ class BaseImageRenderer(Renderer):
 class AptDependencyRenderer(Renderer):
     """Renderer for installation of Debian/Ubuntu (apt) dependencies."""
 
-    @override
     @classmethod
+    @override
     def accepts(cls, config: Config) -> bool:
         try:
             return config.build.dependencies.apt is not None
@@ -71,8 +71,8 @@ class AptDependencyRenderer(Renderer):
 class PythonDependencyRenderer(Renderer):
     """Renderer for installation of Python (pip) dependencies."""
 
-    @override
     @classmethod
+    @override
     def accepts(cls, config: Config) -> bool:
         try:
             return config.build.dependencies.pip is not None
