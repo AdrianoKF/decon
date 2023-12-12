@@ -21,7 +21,7 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: CPython",
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
-dependencies = ["pyyaml", "typer", "typing_extensions"]
+dependencies = ["pyyaml", "typer", "typing_extensions", "rich"]
 
 [project.urls]
 Documentation = "https://github.com/AdrianoKF/decon#readme"

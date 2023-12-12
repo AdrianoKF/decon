@@ -1,6 +1,7 @@
 import logging
 from pathlib import Path
 
+from rich.logging import RichHandler
 from typer import Typer
 
 from decon.assembler import DefaultAssembler
@@ -9,7 +10,10 @@ from decon.config import load_config
 app = Typer(name="decon")
 
 
-logging.basicConfig(level=logging.DEBUG)
+FORMAT = "%(message)s"
+logging.basicConfig(
+    level="NOTSET", format=FORMAT, datefmt="[%X]", handlers=[RichHandler()]
+)
 
 
 @app.command()
